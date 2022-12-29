@@ -1,10 +1,5 @@
 import discord
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-TOKEN = os.getenv("TOKEN", None)
+import config
 
 id_absent_channel = 1052268392637284492
 id_absent_role = 1057638045643456542
@@ -29,4 +24,4 @@ async def on_message(message):
         await message.channel.send('Hello!')
 
 
-client.run(str(TOKEN))
+client.run(str(config.TOKEN))
