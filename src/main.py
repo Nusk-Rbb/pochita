@@ -1,27 +1,32 @@
 import discord
-import discord.member as member
-import discord.message as message
-TOKEN = "MTA1NTQ5NjI5OTY5MDA4MjM3NA.GOa-KH.B0cuNLAw1QUHroNg5WiF2RzUcvxQyklDx3FERY"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+TOKEN = os.getenv("TOKEN", None)
+
 id_absent_channel = 1052268392637284492
 id_absent_role = 1057638045643456542
-emoji_absent = '❌'
 
+intents = discord.Intents.default()
+intents.message_content = True
 
-client = discord.Client()
+client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
     #ログインしたらメッセージを表示する
-    print("Log in")    
+    print(f'We have logged in as {client.user}')
 
 
 @client.event
 async def on_message(message):
-    if message.author.bot:
+    if message.author == client.user:
         return
 
-    if message.content == '/dog':
-        await message.channel.send('わん！')
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
 
 
-client.run(TOKEN)
+client.run(str(TOKEN))
