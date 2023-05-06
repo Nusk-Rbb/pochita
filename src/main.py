@@ -1,8 +1,11 @@
 import discord
 import config
 
-id_absent_channel = 1052268392637284492
-id_absent_role = 1057638045643456542
+f = open("config.txt", "r")
+datalist = f.readline()
+
+id_absent_channel = datalist[0]
+ d_absent_role = datalist[1]
 
 intents = discord.Intents.default()
 intents.message_content = True
